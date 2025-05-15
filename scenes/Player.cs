@@ -15,6 +15,8 @@ public partial class Player : Area2D
     
     public override void _Ready()
     {
+        base._Ready();
+        
         ScreenSize = GetViewportRect().Size;
         
         Hide();
@@ -22,6 +24,8 @@ public partial class Player : Area2D
 
     public override void _Process(double delta)
     {
+        base._Process(delta);
+        
         var velocity = Vector2.Zero;
 
         if (Input.IsActionPressed("move_up"))
