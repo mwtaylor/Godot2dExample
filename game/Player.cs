@@ -1,7 +1,7 @@
 using Godot;
-using System;
-using System.Numerics;
 using Vector2 = Godot.Vector2;
+
+namespace DodgeTheCreeps;
 
 public partial class Player : Area2D
 {
@@ -11,13 +11,18 @@ public partial class Player : Area2D
     [Export]
     public int Speed { get; set; } = 400;
 
-    public Vector2 ScreenSize;
+    private Vector2 _screenSize;
+    private CollisionShape2D _collisionShape;
+    private AnimatedSprite2D _animatedSprite2D;
     
     public override void _Ready()
     {
         base._Ready();
         
-        ScreenSize = GetViewportRect().Size;
+        _screenSize = GetViewportRect().Size;
+
+        _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+        _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         
         Hide();
     }
@@ -48,35 +53,33 @@ public partial class Player : Area2D
             velocity += Vector2.Right;
         }
 
-        var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
-            animatedSprite2D.Play();
+            _animatedSprite2D.Play();
         }
         else
         {
-            animatedSprite2D.Stop();
+            _animatedSprite2D.Stop();
         }
         
         Position += velocity * (float)delta;
         Position = new Vector2(
-            x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-            y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
+            x: Mathf.Clamp(Position.X, 0, _screenSize.X),
+            y: Mathf.Clamp(Position.Y, 0, _screenSize.Y)
         );
 
         if (velocity.X != 0)
         {
-            animatedSprite2D.Animation = "walk";
-            animatedSprite2D.FlipV = false;
-            animatedSprite2D.FlipH = velocity.X < 0;
+            _animatedSprite2D.Animation = "walk";
+            _animatedSprite2D.FlipV = false;
+            _animatedSprite2D.FlipH = velocity.X < 0;
         }
         else if (velocity.Y != 0)
         {
-            animatedSprite2D.Animation = "up";
-            animatedSprite2D.FlipV = velocity.Y > 0;
-            animatedSprite2D.FlipH = false;
+            _animatedSprite2D.Animation = "up";
+            _animatedSprite2D.FlipV = velocity.Y > 0;
+            _animatedSprite2D.FlipH = false;
         }
     }
 
@@ -84,13 +87,13 @@ public partial class Player : Area2D
     {
         Position = position;
         Show();
-        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+        _collisionShape.Disabled = false;
     }
 
     private void OnBodyEntered(Node2D body)
     {
         Hide();
         EmitSignalHit();
-        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+        _collisionShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
     }
 }

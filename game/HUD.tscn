@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cm60gw0j0e5an"]
 
-[ext_resource type="Script" uid="uid://hqbyy1c54rg6" path="res://scenes/Hud.cs" id="1_fls4u"]
+[ext_resource type="Script" uid="uid://hqbyy1c54rg6" path="res://game/Hud.cs" id="1_fls4u"]
 [ext_resource type="FontFile" uid="uid://cpex01trtmalc" path="res://fonts/Xolonium-Regular.ttf" id="1_qpvh6"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_fls4u"]
@@ -56,5 +56,14 @@ text = "Start"
 wait_time = 2.0
 one_shot = true
 
+[node name="ResetStartButtonTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GameOverResetTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="OnMessageTimerTimeout"]
+[connection signal="timeout" from="ResetStartButtonTimer" to="." method="OnResetStartButtonTimerTimeout"]
+[connection signal="timeout" from="GameOverResetTimer" to="." method="OnGameOverResetTimerTimeout"]

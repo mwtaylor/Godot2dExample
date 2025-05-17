@@ -1,8 +1,16 @@
 using Godot;
-using System;
+
+namespace DodgeTheCreeps;
 
 public partial class Mob : RigidBody2D
 {
+    [Export]
+    public float MaximumRandomDirectionChange { get; set; } = Mathf.Pi / 4;
+    [Export]
+    public double MinimumSpeed { get; set; } = 100.0;
+    [Export]
+    public double MaximumSpeed { get; set; } = 250.0;
+    
     public override void _Ready()
     {
         base._Ready();
