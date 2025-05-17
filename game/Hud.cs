@@ -55,13 +55,13 @@ public partial class Hud : CanvasLayer
     
     public void ShowGameOver()
     {
-        ShowMessage("Game Over");
+        ShowMessage(TranslationServer.Translate("Game Over"));
         _gameOverResetTimer.Start();
     }
     
     private void OnGameOverResetTimerTimeout()
     {
-        ShowMessage("Dodge the Creeps!", startTimer: false);
+        ShowMessage(TranslationServer.Translate("Dodge the Creeps!"), startTimer: false);
         _resetStartButtonTimer.Start();
     }
 

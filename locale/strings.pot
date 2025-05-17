@@ -1,0 +1,20 @@
+# LANGUAGE translation for 2dExample for the following files:
+# res://game/HUD.tscn
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 2dExample\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+#: game/HUD.tscn
+msgid "Dodge the Creeps!"
+msgstr ""
+
+#: game/HUD.tscn
+msgid "Start"
+msgstr ""

@@ -13,13 +13,14 @@ events = [SubResource("InputEventAction_fls4u")]
 script = ExtResource("1_fls4u")
 
 [node name="ScoreLabel" type="Label" parent="."]
+auto_translate_mode = 2
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 78.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_qpvh6")
 theme_override_font_sizes/font_size = 64
-text = "0"
+text = "-"
 horizontal_alignment = 1
 vertical_alignment = 1
 

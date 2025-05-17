@@ -44,7 +44,7 @@ public partial class Game : Node
         _startTimer.Start();
         
         _hud.UpdateScore(_score);
-        _hud.ShowMessage("Get Ready!");
+        _hud.ShowMessage(TranslationServer.Translate("Get Ready!"));
     }
 
     private void GameOver()
