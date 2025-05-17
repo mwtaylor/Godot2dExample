@@ -30,6 +30,7 @@ public partial class Main : Node
         GetNode<Timer>("MobTimer").Stop();
         GetNode<Timer>("ScoreTimer").Stop();
         GetNode<Hud>("HUD").ShowGameOver();
+        GetNode<AudioStreamPlayer>("DeathSound").Play();
     }
 
     private void OnMobTimerTimeout()
